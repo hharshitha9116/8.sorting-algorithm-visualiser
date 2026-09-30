@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>📚 Library Management System</h1>
+    <p>Manage books, issues, returns and waiting queues</p>
+</header>
+
+<div class="container">
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+        <div class="stat-card">
+            <h3>Total Books</h3>
+            <p id="totalBooks">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Available Books</h3>
+            <p id="availableBooks">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Issued Books</h3>
+            <p id="issuedBooks">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Waiting Requests</h3>
+            <p id="waitingRequests">0</p>
+        </div>
+    </section>
+
+    <!-- Add Book -->
+    <section class="card">
+        <h2>➕ Add New Book</h2>
+
+        <form id="bookForm">
+
+            <div class="form-grid">
+                <div>
+                    <label>Book ID</label>
+                    <input type="text" id="bookId" required>
+                </div>
+
+                <div>
+                    <label>Title</label>
+                    <input type="text" id="title" required>
+                </div>
+
+                <div>
+                    <label>Author</label>
+                    <input type="text" id="author" required>
+                </div>
+
+                <div>
+                    <label>Category</label>
+                    <input type="text" id="category" required>
+                </div>
+
+                <div>
+                    <label>Quantity</label>
+                    <input type="number" id="quantity" min="1" value="1" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn primary">Add Book</button>
+
+        </form>
+    </section>
+
+    <!-- Search and Sort -->
+    <section class="card">
+
+        <div class="toolbar">
+
+            <div>
+                <label>Search Books</label>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by ID, title, author or category..."
+                >
+            </div>
+
+            <div>
+                <label>Sort By</label>
+                <select id="sortSelect">
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <option value="available">Available Copies</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Filter</label>
+                <select id="filterSelect">
+                    <option value="all">All Books</option>
+                    <option value="available">Available Books</option>
+                    <option value="issued">Issued Books</option>
+                </select>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Books Table -->
+    <section class="card">
+
+        <h2>📖 Book Collection</h2>
+
+        <div class="table-container">
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Total</th>
+                        <th>Available</th>
+                        <th>Queue</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="bookTableBody"></tbody>
+
+            </table>
+        </div>
+
+    </section>
+
+    <!-- Issued Books -->
+    <section class="card">
+
+        <h2>📕 Issued Books</h2>
+
+        <div class="table-container">
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Borrower</th>
+                        <th>Issue Date</th>
+                        <th>Return</th>
+                    </tr>
+                </thead>
+
+                <tbody id="issuedTableBody"></tbody>
+
+            </table>
+        </div>
+
+    </section>
+
+    <!-- Waiting Queue -->
+    <section class="card">
+
+        <h2>⏳ Waiting Queue</h2>
+
+        <div class="table-container">
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Name</th>
+                        <th>Request Date</th>
+                        <th>Position</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="queueTableBody"></tbody>
+
+            </table>
+        </div>
+
+    </section>
+
+</div>
+
+<!-- Issue Modal -->
+<div id="issueModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <h2>📚 Issue Book</h2>
+
+        <p id="issueBookName"></p>
+
+        <input type="hidden" id="issueBookId">
+
+        <label>Borrower Name</label>
+        <input type="text" id="borrowerName" placeholder="Enter borrower name">
+
+        <button class="btn primary" onclick="confirmIssue()">
+            Issue Book
+        </button>
+
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
